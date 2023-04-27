@@ -19,7 +19,7 @@ const dataFilePath = path.join(__dirname, 'data.json');
 //post req
 app.post("/add",(req,res)=>{
 
-    fs.readFile(dataFilePath, 'utf8', (err, data) => {
+    fs.readFile(dataFilePath,(err, data) => {
         if (err) {
           console.error(err);
           res.status(500).send('Error reading data file');
