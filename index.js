@@ -78,10 +78,7 @@ app.get('/getimages',(req,res)=>{
 })
 
 
-app.get("/",(res,req)=>{
-app.use(express.static(__dirname,'img_gallery','build'))
-  res.sendFile(path.resolve(__dirname,'img_gallery','build','index.html'))
-})
+
 
 app.listen(3003,()=>{
 
