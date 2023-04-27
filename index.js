@@ -28,7 +28,7 @@ app.post("/add",(req,res)=>{
     
         let jsonData = JSON.parse(data);
 
-        const newData = { req.body };
+        const newData = req.body;
          jsonData.push(newData);
 
          fs.writeFile(dataFilePath, JSON.stringify(jsonData), (err) => {
