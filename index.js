@@ -19,7 +19,7 @@ const dataFilePath = path.join(__dirname, 'data.json');
 //post req
 app.post("/add",(req,res)=>{
 
-    fs.readFile(dataFilePath,(err, data) => {
+    fs.readFile('data.json','utf-8',(err, data) => {
         if (err) {
           console.error(err);
           res.status(500).send('Error reading data file');
@@ -31,7 +31,7 @@ app.post("/add",(req,res)=>{
         const newData = req.body;
          jsonData.push(newData);
 
-         fs.writeFile(dataFilePath, JSON.stringify(jsonData), (err) => {
+         fs.writeFile('data.json', JSON.stringify(jsonData), (err) => {
             if (err) {
               console.error(err);
               res.status(500).send('Error writing data file');
