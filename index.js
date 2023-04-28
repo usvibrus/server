@@ -19,29 +19,41 @@ const dataFilePath = path.join(__dirname, 'data.json');
 //post req
 app.post("/add",(req,res)=>{
 
-    fs.readFile('data.json','utf-8',(err, data) => {
-        if (err) {
-          console.error(err);
-          res.status(500).send('Error reading data file');
-          return;
-        }
-    
-        let jsonData = JSON.parse(data);
+  fs.readFile('data.json','utf-8',(err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error reading data file');
+      return;
+    }
 
-        const newData = req.body;
-         jsonData.push(newData);
+    let jsonData = JSON.parse(data);
 
-         fs.writeFile('data.json', JSON.stringify(jsonData), (err) => {
-            if (err) {
-              console.error(err);
-              res.status(500).send('Error writing data file');
-              return;
-            }
+    const newData = {
+      url: req.body.url,
+      description: req.body.description
+    };
 
-             res.status(201).json(newData);
-    
-});
-});
+    // Find the index of the existing data in the array
+    const index = jsonData.findIndex((d) => d.url === newData.url);
+
+    if (index !== -1) {
+      // If the data already exists, merge the new data with the existing data
+      jsonData[index] = Object.assign({}, jsonData[index], newData);
+    } else {
+      // If the data doesn't exist, add it to the array
+      jsonData.push(newData);
+    }
+
+    fs.writeFile('data.json', JSON.stringify(jsonData), (err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error writing data file');
+        return;
+      }
+
+      res.status(201).json(newData);
+    });
+  });
 });
 
 
