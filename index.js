@@ -8,7 +8,7 @@ const CORS = require('cors')
 //CORS IS CROSS ORIGIN REQUEST SHARING it is security policy which is required when we are making request of data or post data to api at other domian or other endppoint , 
 //in Cors the origin must be same , if it has same origin it is okk
 
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(CORS({origin:'*'}))
 
 app.use(express.json())//express.json() is a built in middleware function in Express starting from v4.16.0. It parses incoming JSON requests and puts the parsed data in req.body.
