@@ -94,7 +94,7 @@ app.get('/getimages',(req,res)=>{
 
 app.listen(3003,()=>{
 
-    console.log("hey MF hello")
+    console.log("hey hello")
 })
 
 
